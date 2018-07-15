@@ -19,7 +19,7 @@ class Search extends Component {
         return(
             <div className="search-books-bar">
                 <div className="input-wrapper">
-                    <Debounce time="500" handler="onChange">
+                    <Debounce time="200" handler="onChange">
                         <input type="text"  placeholder="Search a location..."
                                onChange={(event) => {
                                    this.searchForLocation(event);

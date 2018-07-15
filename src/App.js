@@ -3,20 +3,23 @@ import './App.css';
 import MapComponent from "./MapComponent";
 import Sidebar from "./Sidebar"
 import Navbar from "./Navbar"
-import * as flickrAPI from './flickrAPI'
+import MarkerInfo from "./MarkerInfo";
 const google = window.google;
 let newMap;
+let marker;
 class App extends React.Component {
-    state= {
-        locations : [
-            {title: 'Pula Arena', location: {lat: 44.872952, lng: 13.849226}, id:1},
-            {title: 'National Park Brioni, Holy Jerolim Island', location: {lat: 44.89861, lng: 13.785536}, id:2},
-            {title: 'Forum Square', location: {lat: 44.870001, lng: 13.842342}, id:3},
-            {title: 'Hawaiian Beach Verudela', location: {lat: 44.835201, lng: 13.830269}, id:4},
-            {title: 'Golden Door', location: {lat: 44.868291, lng: 13.846975}, id:5},
-            {title: 'National Park Brioni, Big Brioni Island', location: {lat: 44.922823, lng: 13.736672}, id:6}
-        ],
-    };
+        state = {
+            locations: [
+                {title: 'Pula Arena', location: {lat: 44.872952, lng: 13.849226}, id: 1},
+                {title: 'Island', location: {lat: 44.89861, lng: 13.785536}, id: 2},
+                {title: 'Forum Square', location: {lat: 44.870001, lng: 13.842342}, id: 3},
+                {title: 'Hawaiian Beach', location: {lat: 44.835201, lng: 13.830269}, id: 4},
+                {title: 'Golden Door', location: {lat: 44.868291, lng: 13.846975}, id: 5},
+                {title: 'Brioni', location: {lat: 44.922823, lng: 13.736672}, id: 6}
+            ],
+            markerClicked: ""
+        };
+
 
     initMap() {
         let map = new google.maps.Map(document.getElementById('map'), {
@@ -30,7 +33,7 @@ class App extends React.Component {
         for(let i= 0; i < locations.length; i++){
             let position = locations[i].location;
             let title = locations[i].title;
-            let marker = new google.maps.Marker({
+            marker = new google.maps.Marker({
                 map:map,
                 position: position,
                 title: title,
@@ -40,8 +43,14 @@ class App extends React.Component {
             markers.push(marker);
             bounds.extend(marker.position);
             marker.addListener("click", function () {
-                makeInfoWindow(this,largeInfoWindow)
-            })
+                makeInfoWindow(this,largeInfoWindow);
+                clickedMarker(this);
+            });
+            let clickedMarker = (marker) => {
+                this.setState({
+                    markerClicked: marker.title
+                });
+            };
         }
         map.fitBounds(bounds);
         function  makeInfoWindow(marker, infoWindow) {
@@ -56,8 +65,8 @@ class App extends React.Component {
             }
         }
 
-
     }
+
 
 
     async componentDidMount(){
@@ -75,16 +84,22 @@ class App extends React.Component {
     }
 
 
-  render() {
 
-    return (
-      <div className="App">
-        <Navbar />
-        <Sidebar locations={this.state.locations} zoomToMarker={this.zoomToMarker.bind(this)}/>
-        <MapComponent locations={this.state.locations}/>
-      </div>
-    );
-  }
+
+
+
+
+
+    render() {
+        return (
+            <div className="App">
+                <Navbar />
+                <Sidebar locations={this.state.locations} zoomToMarker={this.zoomToMarker.bind(this)}/>
+                <MapComponent locations={this.state.locations}/>
+                <MarkerInfo markerClicked={this.state.markerClicked}/>
+            </div>
+        );
+    }
 }
 
 export default App;

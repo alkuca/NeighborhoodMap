@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import './App.css'
 import ListItem from "./ListItem";
 import Search from"./Search";
+
 class Sidebar extends Component{
 
     state = {
@@ -21,7 +22,6 @@ class Sidebar extends Component{
                 return location.title.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1;
             },
         );
-
 
 
         return(
