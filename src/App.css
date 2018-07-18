@@ -1,43 +1,68 @@
 
 html,
 body {
-
+  width:100%;
   height: 100%;
   margin: 0;
   padding: 0;
   font-family: 'Philosopher', sans-serif;
+  background: linear-gradient(to top, rgb(15, 32, 39), rgb(32, 58, 67), rgb(44, 83, 100));
 }
+
+.App{
+  display:flex;
+  flex-flow: row wrap;
+  height:100vh;
+}
+
 #map {
   bottom:0;
   left:15%;
-  height: 100%;
   position: absolute;
   right: 0;
+  height:100%;
+  z-index:0;
 }
 
 .sidebar{
   width:15%;
-  position: absolute;
-  left:0;
-  top:0;
-  bottom:0;
   height:100%;
-  background: linear-gradient(to top, rgb(15, 32, 39), rgb(32, 58, 67), rgb(44, 83, 100));
-  z-index:10;
 }
 
+.app-name-container{
 
+}
 
-.items{
+.app-name{
+  padding-top:10px;
+  padding-bottom:10px;
   color: #c1c1c1;
-  margin-top:120px;
+  width:100%;
   display:flex;
   flex-direction: column;
   text-align: center;
+  margin:0;
+  font-size:24px;
+}
+
+.search-container {
+  display:flex;
+  margin-top:50px;
+  flex-direction: column;
+}
+
+.items{
+  margin-top:50px;
+  width:100%;
+  color: #c1c1c1;
+  display:flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
 }
 
 .items h3{
-  font-size:28px;
+  font-size:23px;
 }
 
 .each-item-container{
@@ -65,30 +90,17 @@ body {
   color: #f1f1f1;
 }
 
-.navbar{
-  position:absolute;
-  width:85%;
-  top:0;
-  left:15%;
-  background: linear-gradient(to left, rgb(15, 32, 39), rgb(32, 58, 67), rgb(44, 83, 100));
-  z-index:11;
-  height:8%;
-}
-
-.navbar-text{
-  text-align:center;
-  color: #c1c1c1;
-}
-
 
 .input-wrapper input{
-  width: 100%;
+  width: 75%;
+  display:flex;
+  margin:auto;
   padding: 8px 8px;
   font-size: 1em;
   border: 2px solid rgba(193, 193, 193, 0.50);
   border-radius:15px;
   outline: none;
-  margin:10px;
+  justify-content:center;
   background: rgba(255, 255, 255, 0.05);
   color:white;
   transition:0.2s ease-in-out;
@@ -110,29 +122,206 @@ body {
 .input-wrapper input:focus:-ms-input-placeholder { color:transparent; }
 
 
-.search-books-bar {
-  position: absolute;
-  width: 80%;
-  top: 1.5%;
-  left:3%;
+.info-content{
+  visibility:hidden;
+ text-align: center;
 }
-
 
 .marker-info{
   position:absolute;
+  background-color: white;
+  height:100%;
   width:400px;
-  left:15%;
-  top:8%;
-  background-color:white;
-  z-index:100;
-  height:92%;
-  overflow-y: scroll;
-}
-.marker-info img{
-  width:400px;
-  height:300px;
+  overflow: hidden;
+  transition:0.3s ease-in-out;
+  bottom:0;
+  border-top-right-radius:22px;
 }
 
 
 
+.wiki-image{
+  max-width:350px;
+  height:280px;
+  margin:25px;
+}
+.wiki-text{
+  margin:25px;
+}
 
+.open-close-button{
+  width:40px;
+  height:40px;
+  border-radius:100%;
+  background-color: #ea4235;
+  position:absolute;
+  right:5px;
+  top:5px;
+  transition:0.3s ease-in-out;
+}
+
+.inner-circle{
+  width:15px;
+  height:15px;
+  border-radius:100%;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-left:-7px;
+  margin-top:-7px;
+  background-color: #811411;
+  transition:0.3s ease-in-out;
+}
+
+.open-close-button:hover{
+  background-color: #811411;
+  transition:0.2s ease-in-out;
+}
+
+.inner-circle:hover{
+  background-color: #ea4235;
+  transition:0.2s ease-in-out;
+}
+
+
+.hide{
+  width:50px;
+  transition:0.4s ease-in-out;
+  height:50px;
+}
+
+.search-and-items{
+    visibility: visible ;
+}
+
+.marker-clicked{
+  text-align:center;
+}
+
+
+.gm-style:nth-child(1){
+  left:50px !important;
+}
+
+@media screen and (max-width:1680px) {
+    .items h3{
+        font-size:20px;
+    }
+    .items {
+        margin-top:10px;
+    }
+    .search-container{
+        margin-top:30px;
+    }
+    .app-name{
+        font-size:22px
+    }
+}
+
+@media screen and (max-height:780px) {
+    .items h3{
+        font-size:20px;
+    }
+}
+
+@media screen and (max-width:1500px) {
+    .items h3{
+        font-size:16px;
+    }
+    .items {
+        margin-top:10px;
+    }
+    .search-container{
+        margin-top:30px;
+    }
+    .app-name{
+        font-size:18px
+    }
+}
+
+@media screen and (max-width:1200px) {
+    .items h3{
+        font-size:13px;
+    }
+    .items {
+        margin-top:10px;
+    }
+    .search-container{
+        margin-top:30px;
+    }
+    .app-name{
+        font-size:18px
+    }
+
+}
+
+@media screen and (max-width:1040px) {
+    .sidebar{
+        display:flex;
+        flex-direction: column;
+        width:100%;
+        height:10%;
+        transition: 0.5s ease-in-out;
+        z-index: 1000;
+        background: linear-gradient(to top, rgb(15, 32, 39), rgb(32, 58, 67), rgb(44, 83, 100));
+
+    }
+    .items{
+        margin-top:0;
+        color: #c1c1c1;
+        display:flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+    }
+    .each-item-container{
+        opacity:0.7;
+        margin-top:8px;
+        margin-bottom:8px;
+    }
+    .each-item-container h3{
+        margin-right:0;
+        margin-left:0;
+        font-size:18px;
+    }
+    .search-and-items{
+        display:flex;
+        flex-direction:column;
+        visibility: hidden ;
+    }
+    #map{
+        left:0;
+        top:10%;
+    }
+    .marker-info{
+        height:100%;
+        width:100%;
+        flex-direction: column;
+        transition:0.3s ease-in-out;
+        top:110%;
+        left:0;
+        border-top-right-radius:0;
+
+    }
+    .open-close-button{
+        visibility: hidden;
+    }
+
+
+}
+
+.hamburger{
+    position:absolute;
+    right:8px;
+    height:10%;
+    transition: 1s ease-in-out;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hamburger img{
+    width:50px;
+    height:50px;
+
+}

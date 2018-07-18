@@ -2,16 +2,38 @@ import React, {Component} from 'react'
 import './App.css'
 import ListItem from "./ListItem";
 import Search from"./Search";
-
+const images = require.context('../public/images', true);
+const hamburgerIcon = images("./hamburger.png");
 class Sidebar extends Component{
 
     state = {
-        searchQuery: ""
+        searchQuery: "",
+        hamburgerStatus:"closed"
     };
 
 
     getQuery(query){
         this.setState({searchQuery: query})
+    }
+
+
+    hamburgerFunctionality(){
+        let hamburger = document.querySelector(".hamburger");
+        let sidebar = document.querySelector(".sidebar");
+        let hamburgerContent = document.querySelector(".search-and-items");
+        if(this.state.hamburgerStatus==="closed"){
+            sidebar.style.height="110%";
+            setTimeout(function(){ hamburgerContent.style.visibility="visible"; }, 500);
+            this.setState({
+                hamburgerStatus:"open"
+            })
+        }else if(this.state.hamburgerStatus==="open"){
+            sidebar.style.height="10%";
+            hamburgerContent.style.visibility="hidden";
+            this.setState({
+                hamburgerStatus:"closed"
+            })
+        }
     }
 
 
@@ -26,18 +48,34 @@ class Sidebar extends Component{
 
         return(
             <div className="sidebar">
-                <Search
-                    locations={this.props.locations}
-                    getQuery={this.getQuery.bind(this)}
-                />
-                <div className="items">
-                    {filteredLocations.map((location) =>
-                        <ListItem
-                            key={location.id}
-                            locations={location}
-                            zoomToMarker={this.props.zoomToMarker}
-                        />
-                    )}
+                <div className="hamburger"
+                     onClick={() => {
+                        this.hamburgerFunctionality()
+                     }}
+                >
+                    <img src={hamburgerIcon} />
+                </div>
+                <div className="app-name-container">
+                    <h1 className="app-name">Neighborhood <br/>Map</h1>
+                </div>
+                <div className="search-and-items">
+                    <Search
+                        locations={this.props.locations}
+                        getQuery={this.getQuery.bind(this)}
+                    />
+                    <div className="items">
+                        {filteredLocations.map((location) =>
+                            <ListItem
+                                key={location.id}
+                                locations={location}
+                                zoomToMarker={this.props.zoomToMarker}
+                                titleClicked={this.props.titleClicked}
+                                setImage={this.props.setImage}
+                                getWiki={this.props.getWiki}
+                                onlyOpenInfoSidebar={this.props.onlyOpenInfoSidebar}
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
         )
