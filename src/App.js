@@ -11,8 +11,8 @@ const vrata = images("./vrata.jpg");
 const brijuni = images("./brijuni.jpg");
 const forum = images("./forum.jpg");
 const google = window.google;
-let newMap;
 let marker;
+let map;
 
 class App extends React.Component {
         state = {
@@ -29,12 +29,10 @@ class App extends React.Component {
             wiki:"",
         };
 
-
     initMap() {
-        let map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 44.872952, lng: 13.849226}
         });
-        newMap = map;
         let locations = this.state.locations;
         let markers = [];
         let largeInfoWindow = new google.maps.InfoWindow();
@@ -80,23 +78,17 @@ class App extends React.Component {
         }
     }
 
-
-
     componentDidMount(){
         this.initMap();
-
     }
-
-
 
     zoomToMarker(event){
-        newMap.setCenter(event);
-        newMap.setZoom(14);
+        map.setCenter(event);
+        map.setZoom(14);
         setTimeout(function () {
-            newMap.setZoom(16);
+            map.setZoom(16);
         },800)
     }
-
 
     titleClicked(event){
         this.setState({
@@ -117,7 +109,6 @@ class App extends React.Component {
             })
         }
     }
-
 
     getWiki(title){
         fetch("https://en.wikipedia.org/w/api.php?action=opensearch&search="+title+"&format=json&origin=*")
@@ -161,8 +152,6 @@ class App extends React.Component {
             infoContent.style.visibility="visible";
         }
     }
-
-
 
     render() {
         return (

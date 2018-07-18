@@ -5,17 +5,13 @@ import { Debounce } from 'react-throttle';
 class Search extends Component {
     state = {
         query: ""
-
     };
 
     searchForLocation(event){
         this.setState({query: event.target.value});
     }
 
-
     render(){
-
-
         return(
             <div className="search-container">
                 <div className="input-wrapper">

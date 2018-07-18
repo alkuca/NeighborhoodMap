@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
 import './App.css'
 
-
 class APIinfo extends Component{
-
-
     render(){
         return(
             <div className="info-content">
@@ -15,6 +12,5 @@ class APIinfo extends Component{
         )
     }
 }
-
 
 export default APIinfo;
