@@ -1,6 +1,12 @@
 {
-  "main.css": "static/css/main.973b0e5f.css",
-  "main.css.map": "static/css/main.973b0e5f.css.map",
-  "main.js": "static/js/main.3da2b725.js",
-  "main.js.map": "static/js/main.3da2b725.js.map"
+  "main.css": "static/css/main.78623e28.css",
+  "main.css.map": "static/css/main.78623e28.css.map",
+  "main.js": "static/js/main.6f89883d.js",
+  "main.js.map": "static/js/main.6f89883d.js.map",
+  "static\\media\\arena.jpg": "static/media/arena.6c720420.jpg",
+  "static\\media\\beach.jpg": "static/media/beach.df3f74be.jpg",
+  "static\\media\\brijuni.jpg": "static/media/brijuni.f54e0ec0.jpg",
+  "static\\media\\forum.jpg": "static/media/forum.6588d586.jpg",
+  "static\\media\\jerolim.jpg": "static/media/jerolim.837522d8.jpg",
+  "static\\media\\vrata.jpg": "static/media/vrata.8db1e07e.jpg"
 }
