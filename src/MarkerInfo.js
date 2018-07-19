@@ -5,25 +5,7 @@ const images = require.context('../public/images', true);
 const arrow = images("./arrow.png");
 
 class MarkerInfo extends Component{
-    state={
-        arrow:false
-    };
 
-    rotate(){
-        let arrowIcon = document.querySelector(".arrow-icon");
-        if(this.state.arrow === false){
-            arrowIcon.style.transform = "rotate(180deg)";
-        this.setState({
-            arrow:true
-        })
-        }
-        else if(this.state.arrow === true){
-            arrowIcon.style.transform = "none";
-        this.setState({
-            arrow:false
-        });
-        }
-    }
 
     render(){
         return(
@@ -37,7 +19,6 @@ class MarkerInfo extends Component{
                     <div className="open-close-button"
                         onClick={() => {
                             this.props.openCloseInfoSidebar();
-                            this.rotate();
                     }}>
                         <div className="arrow">
                             <img className="arrow-icon" src={arrow} alt="arrow"/>

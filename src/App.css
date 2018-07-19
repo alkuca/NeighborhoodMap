@@ -6,7 +6,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Philosopher', sans-serif;
-  background: linear-gradient(to top, rgb(15, 32, 39), rgb(32, 58, 67), rgb(44, 83, 100));
+  background: linear-gradient(to top, #152336, #25435e);
 }
 
 .App {
@@ -39,6 +39,7 @@ body {
   text-align: center;
   margin: 0;
   font-size: 24px;
+  margin-top:30px;
 }
 
 .search-container {
@@ -62,15 +63,21 @@ body {
 }
 
 .each-item-container {
-  opacity: 0.7;
+  opacity: 0.8;
   margin-top: 10px;
   margin-bottom: 10px;
+  outline:none;
+}
+
+.each-item-container:focus {
+    color:white;
 }
 
 .each-item-container h3 {
   margin-right: 15px;
   margin-left: 15px;
 }
+
 #hr {
   border: 0;
   height: 1px;
@@ -201,7 +208,7 @@ body {
     height: 50px;
 }
 
-@media screen and (max-width:1680px) {
+@media screen and (max-width: 1680px) {
     .items h3 {
         font-size: 20px;
     }
@@ -216,43 +223,29 @@ body {
     }
 }
 
-@media screen and (max-height:780px) {
+@media screen and (max-height: 780px) {
     .items h3 {
         font-size: 20px;
     }
 }
 
-@media screen and (max-width:1500px) {
+@media screen and (max-width: 1500px) {
     .items h3 {
         font-size: 16px;
     }
-    .items {
-        margin-top: 10px;
-    }
+
     .search-container {
         margin-top: 30px;
     }
-    .app-name {
-        font-size: 18px
-    }
 }
 
-@media screen and (max-width:1200px) {
+@media screen and (max-width: 1200px) {
     .items h3 {
         font-size: 13px;
     }
-    .items {
-        margin-top: 10px;
-    }
-    .search-container {
-        margin-top: 30px;
-    }
-    .app-name {
-        font-size: 18px
-    }
 }
 
-@media screen and (max-width:1040px) {
+@media screen and (max-width: 1040px) {
     .sidebar {
         display: flex;
         flex-direction: column;
@@ -260,7 +253,7 @@ body {
         height: 10%;
         transition: 0.5s ease-in-out;
         z-index: 1000;
-        background: linear-gradient(to top, rgb(15, 32, 39), rgb(32, 58, 67), rgb(44, 83, 100));
+        background: linear-gradient(to top, #152336, #25435e);
     }
 
     .items {
@@ -273,7 +266,6 @@ body {
     }
 
     .each-item-container {
-        opacity: 0.7;
         margin-top: 8px;
         margin-bottom: 8px;
     }
@@ -315,5 +307,9 @@ body {
 
     .hamburger {
         visibility: visible !important;
+    }
+    .app-name {
+        margin-top:0;
+        font-size: 20px;
     }
 }
