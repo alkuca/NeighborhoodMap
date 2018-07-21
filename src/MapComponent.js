@@ -2,19 +2,13 @@ import React, {Component} from 'react'
 import './App.css'
 
 
-class MapComponent extends Component {
-
-
-
-    render (){
+function MapComponent(props) {
         return (
-            <div>
+            <div role="application">
                 <div id="map"></div>
             </div>
         )
-    }
 }
 
-
-    export default MapComponent;
+export default MapComponent;
 

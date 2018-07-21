@@ -12,6 +12,7 @@ const brijuni = images("./brijuni.jpg");
 const forum = images("./forum.jpg");
 const google = window.google;
 let marker;
+let markers = [];
 let map;
 
 class App extends React.Component {
@@ -27,14 +28,19 @@ class App extends React.Component {
             markerClicked: "",
             imageSrc: "",
             wiki:"",
+            query:"",
         };
 
     initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 44.872952, lng: 13.849226}
-        });
+        try{
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 44.872952, lng: 13.849226}
+            });
+        }catch (error) {
+            alert("something is wrong with google maps request");
+        }
+
         let locations = this.state.locations;
-        let markers = [];
         let largeInfoWindow = new google.maps.InfoWindow();
         let bounds = new google.maps.LatLngBounds();
         for(let i= 0; i < locations.length; i++){
@@ -42,7 +48,7 @@ class App extends React.Component {
             let title = locations[i].title;
             let images = locations[i].image;
             marker = new google.maps.Marker({
-                map:map,
+                map: map,
                 position: position,
                 title: title,
                 image: images,
@@ -64,6 +70,7 @@ class App extends React.Component {
                 this.onlyOpenInfoSidebar();
             };
         }
+
         map.fitBounds(bounds);
         function  makeInfoWindow(marker, infoWindow) {
             if(infoWindow.marker !== marker){
@@ -128,10 +135,11 @@ class App extends React.Component {
                 this.wikiTest(data);
             })
             .catch((error) => {
-                console.log(error)
+                alert(error)
             });
     }
 
+    // opens or close second sidebar
     openCloseInfoSidebar(){
         let infoContent = document.querySelector(".info-content");
         let infoSidebar = document.querySelector(".marker-info");
@@ -144,6 +152,7 @@ class App extends React.Component {
         }
     }
 
+    // only open second sidebar
     onlyOpenInfoSidebar(){
         let infoContent = document.querySelector(".info-content");
         let infoSidebar = document.querySelector(".marker-info");
@@ -152,6 +161,22 @@ class App extends React.Component {
             infoContent.style.visibility="visible";
         }
     }
+
+    searchForLocation(event){
+        this.setState({
+            query: event.target.value,
+        });
+        // displays and hides markers based on search query
+        markers.forEach(element =>{
+            if(element.title.toLowerCase().indexOf(this.state.query) !== -1){
+                element.setVisible(true)
+            }else{
+                element.setVisible(false)
+            }
+        });
+    }
+
+
 
     render() {
         return (
@@ -163,6 +188,8 @@ class App extends React.Component {
                     setImage={this.setImage.bind(this)}
                     getWiki={this.getWiki.bind(this)}
                     onlyOpenInfoSidebar={this.onlyOpenInfoSidebar.bind(this)}
+                    searchForLocation={this.searchForLocation.bind(this)}
+                    query={this.state.query}
                 />
                 <MapComponent
                     locations={this.state.locations}/>

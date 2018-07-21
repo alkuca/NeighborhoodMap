@@ -6,7 +6,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Philosopher', sans-serif;
-  background: linear-gradient(to top, #152336, #25435e);
+    background: linear-gradient(to top, #152336, #25435e);
+
 }
 
 .App {
@@ -27,6 +28,7 @@ body {
 .sidebar {
   width: 15%;
   height: 100%;
+    background: linear-gradient(to top, #152336, #25435e);
 }
 
 .app-name {

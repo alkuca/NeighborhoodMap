@@ -7,20 +7,22 @@ const hamburgerIcon = images("./hamburger.png");
 
 class Sidebar extends Component{
     state = {
-        searchQuery: "",
         hamburgerStatus:"closed"
     };
 
-    getQuery(query){
-        this.setState({searchQuery: query})
-    }
 
     hamburgerFunctionality(){
         if(window.innerWidth < 1039) {
             let sidebar = document.querySelector(".sidebar");
+            let mapContainer = document.querySelector("#map");
             let hamburgerContent = document.querySelector(".search-and-items");
+            let markerInfo = document.querySelector(".marker-info");
             if (this.state.hamburgerStatus === "closed") {
                 sidebar.style.height = "110%";
+                setTimeout(function () {
+                    mapContainer.style.top = "110%";
+                },700);
+                markerInfo.style.top = "210%";
                 setTimeout(function () {
                     hamburgerContent.style.visibility = "visible";
                 }, 500);
@@ -29,6 +31,8 @@ class Sidebar extends Component{
                 })
             } else if (this.state.hamburgerStatus === "open") {
                 sidebar.style.height = "10%";
+                mapContainer.style.top = "10%";
+                markerInfo.style.top = "110%";
                 hamburgerContent.style.visibility = "hidden";
                 this.setState({
                     hamburgerStatus: "closed"
@@ -40,13 +44,13 @@ class Sidebar extends Component{
     render(){
         let filteredLocations = this.props.locations.filter(
             (location) => {
-                return location.title.toLowerCase().indexOf(this.state.searchQuery.toLowerCase()) !== -1;
+                return location.title.toLowerCase().indexOf(this.props.query.toLowerCase()) !== -1;
             },
         );
 
         return(
-            <div className="sidebar">
-                <div className="hamburger" tabIndex="-1"
+            <aside className="sidebar">
+                <div role="button" className="hamburger" tabIndex="-1"
                      onClick={() => {
                         this.hamburgerFunctionality()
                      }}>
@@ -58,7 +62,7 @@ class Sidebar extends Component{
                 <div className="search-and-items">
                     <Search
                         locations={this.props.locations}
-                        getQuery={this.getQuery.bind(this)}
+                        searchForLocation={this.props.searchForLocation}
                     />
                     <div className="items">
                         {filteredLocations.map((location) =>
@@ -75,7 +79,7 @@ class Sidebar extends Component{
                         )}
                     </div>
                 </div>
-            </div>
+            </aside>
         )
     }
 }
