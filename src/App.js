@@ -31,6 +31,10 @@ class App extends React.Component {
             query:"",
         };
 
+    gm_authFailure(){
+        window.alert("Google Maps error!")
+    }
+
     initMap() {
         try{
             map = new google.maps.Map(document.getElementById('map'), {
@@ -87,15 +91,24 @@ class App extends React.Component {
 
     componentDidMount(){
         this.initMap();
+        window.gm_authFailure = this.gm_authFailure;
     }
 
     zoomToMarker(event){
-        map.setCenter(event);
+        map.setCenter(event.location);
         map.setZoom(14);
         setTimeout(function () {
             map.setZoom(16);
-        },800)
+        },800);
+        setTimeout(function () {
+            markers.forEach(element => {
+                if (element.title === event.title && element.animation === null) {
+                    element.setAnimation(4);
+                }
+            });
+        },1200)
     }
+
 
     titleClicked(event){
         this.setState({

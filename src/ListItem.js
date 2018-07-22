@@ -5,7 +5,7 @@ function ListItem (props){
     return(
         <div className="each-item-container" tabIndex="0"
              onClick={(event) => {
-                 props.zoomToMarker(props.locations.location);
+                 props.zoomToMarker(props.locations);
                  props.titleClicked(props.locations.title);
                  props.setImage(props.locations.image);
                  props.getWiki(props.locations.title);
