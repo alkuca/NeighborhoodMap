@@ -15,6 +15,7 @@ let marker;
 let markers = [];
 let map;
 
+
 class App extends React.Component {
         state = {
             locations: [
@@ -41,7 +42,7 @@ class App extends React.Component {
                 center: {lat: 44.872952, lng: 13.849226}
             });
         }catch (error) {
-            alert("something is wrong with google maps request");
+            alert("something is wrong with google maps request, refresh the page");
         }
 
         let locations = this.state.locations;
@@ -90,9 +91,14 @@ class App extends React.Component {
     }
 
     componentDidMount(){
-        this.initMap();
+        let scope=this;
+        let intervalID = setInterval(function(){
+            google?function(){scope.initMap();clearInterval(intervalID)}():null;
+        },100);
+
         window.gm_authFailure = this.gm_authFailure;
     }
+
 
     zoomToMarker(event){
         map.setCenter(event.location);
